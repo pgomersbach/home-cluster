@@ -1,9 +1,8 @@
 ARG ARCH=
-FROM ${ARCH}debian:buster-slim
+# FROM ${ARCH}debian:buster-slim
+FROM ${ARCH}centos:7 AS prep_files
 
-RUN apt-get update \
-&& apt-get install -y curl \
-&& rm -rf /var/lib/apt/lists/*
+RUN yum update -y && yum install -y tar gzip curl && yum clean all
 
 ENTRYPOINT [ "curl" ]
 
